@@ -29,7 +29,8 @@ const http=require('http');
 const socketIo=require('socket.io');
 const cors=require('cors');
 const { ifError } = require('assert');
-const PORT= process.env.PORT || 8000;
+// const PORT= process.env.PORT || 8000;
+const PORT= process.env.PORT
 let userActiv=0;
 let userList,i=1;
 let app=express();
@@ -132,7 +133,9 @@ const saveCIndb = async (myContact,data) => {
 // }
 // deleteFromDb();
 
-
+app.get('/',(req,resp)=>{
+    resp.send('hello Chatbook Server');
+    })
 
 
 const io =socketIo(server,{
