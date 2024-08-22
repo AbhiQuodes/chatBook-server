@@ -1,7 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 // const chatStore= mongoose.createConnection('mongodb://localhost:27017/chatstore');
-const chatStore = mongoose.createConnection(process.env.MONGO_URL);
+const chatStore = mongoose.createConnection(process.env.MONGO_URL+'chatStore'+'?retryWrites=true&w=majority');
 
 // const chatStore = mongoose.createConnection('mongodb+srv://Abhiquodes:studentb08sybcs@chat-application-cluste.0dhd4.mongodb.net/')
 // mongoose configuration connection code to be replaced in to another file
@@ -162,7 +162,7 @@ io.on('connection',(socket)=>{
         
        user[socket.id]=data.name;
       
-       accounts[socket.id]=mongoose.createConnection(`mongodb://localhost:27017/${data.name}`);
+       accounts[socket.id]=mongoose.createConnection(process.env.MONGO_URL+(data.name)+'?retryWrites=true&w=majority');
     
        // after me just joining i want me chats and saved contacts 
        // from data base s
